@@ -71,3 +71,40 @@ class PahtolocalHistory(db.Model):
     othersPathologies = db.Column(db.String(64), index = True)
     professionalIlness = db.Column(db.String(64), index = True)
     surgeries = db.Column(db.String(64), index = True)
+
+class InitialSanitaryControl(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    country = db.Column(db.String(64), index = True)
+    outside = db.Column(db.Boolean, index = True)
+    departureDate = db.Column(db.Date, index = True)
+    arrivalDate = db.Column(db.Date, index = True)
+    returnControl = db.Column(db.Boolean, index = True)
+    returnControlDate = db.Column(db.Date, index = True)
+    controls = db.Column(db.String(6), index = True)
+    return3MonthControl = db.Column(db.Boolean, index = True)
+    returneMothControlDate = db.Column(db.Date, index = True)
+    controls3Month = db.Column(db.String(6), index = True)
+
+class Vacunation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    vaccines = db.Column(db.String(11), index = True)
+    anothers = db.Column(db.String(64), index = True)
+
+class GeneticsRisks(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, index = True)
+    risks = db.Column(db.String(4), index=True)
+
+class ExpositionRisks(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, index = True)
+    risks = db.Column(db.String(17), index=True)
+    anothers = db.Column(db.String(17), index=True)
+    non_ionazinRadiations = db.Column(db.String(4), index=True)
+    ionazingRadiations = db.Column(db.String(6), index=True)
+    expRadiometricEvaluation = db.Column(db.String(1), index=True)
+    
+    
+    
+    
+    
