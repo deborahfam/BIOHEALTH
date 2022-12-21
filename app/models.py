@@ -15,7 +15,7 @@ class Patiente(db.Model):
     jobRecord = db.Column(db.Integer, index=True)
     jobZone = db.Column(db.String(64), index=True)
     ocupCategory = db.Column(db.String(64), index=True)
-    fecha = db.Column(db.Date, index=True)
+    date = db.Column(db.Date, index=True)
     firstname = db.Column(db.String(64), index=True)
     lastname = db.Column(db.String(64), index=True)
     age = db.Column(db.Integer, index=True)
@@ -36,3 +36,18 @@ class Patiente(db.Model):
     
     def __repr__(self):
         return '<Patiente {}>'.format(self.firstname + self.lastname)
+
+class ChargeSheet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, index = True)
+    consultationReason = db.Column(db.String(64), index = True)
+    diagnostic = db.Column(db.String(64), index = True)
+    reaction = db.Column(db.String(64), index = True)
+    indicatedDrugs = db.Column(db.String(64), index = True)
+    evolution = db.Column(db.String(200), index = True)
+
+class Resume(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, index = True)    
+    dispensaryGroup = db.Column(db.String(64), index = True)
+    valoration = db.Column(db.String(200), index = True)
