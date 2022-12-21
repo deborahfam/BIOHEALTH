@@ -51,3 +51,23 @@ class Resume(db.Model):
     date = db.Column(db.Date, index = True)    
     dispensaryGroup = db.Column(db.String(64), index = True)
     valoration = db.Column(db.String(200), index = True)
+
+class OcupationalHistory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, index = True)  
+    previousOccupation = db.Column(db.String(64), index = True)
+    exposedTo = db.Column(db.String(64), index = True)
+    exposedToInTime = db.Column(db.String(64), index = True)
+    currentOccupation = db.Column(db.String(64), index = True)
+    currentOccupationSince = db.Column(db.Date, index = True)
+
+class InitialHealthState(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    drugAlergy = db.Column(db.String(64), index = True)
+
+class PahtolocalHistory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    pathologies = db.Column(db.String(20), index = True)
+    othersPathologies = db.Column(db.String(64), index = True)
+    professionalIlness = db.Column(db.String(64), index = True)
+    surgeries = db.Column(db.String(64), index = True)
