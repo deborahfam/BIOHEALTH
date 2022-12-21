@@ -34,3 +34,5 @@ class Patiente(db.Model):
     factorGroup = db.Column(db.Integer, index=True)
     donor = db.Column(db.Boolean, index=True)
     
+    def __repr__(self):
+        return '<Patiente {}>'.format(self.firstname + self.lastname)
