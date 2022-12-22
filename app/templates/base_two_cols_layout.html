@@ -5,9 +5,32 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </head>
   <body class="two-cols-container">
-    <div class="image-col-container">
-      <img class="login-aside-image" src="{{image-url}}"/>
-    </div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/patiente/new">Datos Personales</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/chargesheet/new">Hoja de Cargo</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/resume/new">Resumen</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/histOcup/new">Hist Ocup</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/ihs/new">Est Salud Inic</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/pathHist/new">Antec Patol</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/iSanitCont/new">Control Sanit Init</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/vacunation/new">Vacunacion</a>
+      </li>
+    </ul>
     <div class="col-6 h-100 w-100">
       {% block content %}{% endblock %}
     </div>

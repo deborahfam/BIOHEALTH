@@ -4,7 +4,7 @@ from wtforms import BooleanField
 from werkzeug.urls import url_parse
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
-from app.form import LoginForm, InitialSanitaryControlForm, PathologicalHistoryForm, InitialHealthStateForm, OcupationalHistoryForm, ResumeForm, PatienteForm, ChargesheetForm, ResetPasswordForm, ResetPasswordRequestForm
+from app.form import LoginForm, VacunationForm, InitialSanitaryControlForm, PathologicalHistoryForm, InitialHealthStateForm, OcupationalHistoryForm, ResumeForm, PatienteForm, ChargesheetForm, ResetPasswordForm, ResetPasswordRequestForm
 from app.email import send_password_reset_email
 
 @app.route('/')
@@ -83,6 +83,14 @@ def iniSanCon_new():
         print(request.form)
     form = InitialSanitaryControlForm()
     return render_template('patiente_form.html', title='Añadir Control Sanitario Inicial', form=form)
+
+@app.route('/vacunation/new',methods=['GET', 'POST'])
+def vacunations_new():
+    if(request.method == 'POST'):
+        print(request.form)
+    form = VacunationForm()
+    return render_template('patiente_form.html', title='Añadir Control Sanitario Inicial', form=form)
+
 
 
 # @app.route('/reset_password_request', methods=['GET', 'POST'])

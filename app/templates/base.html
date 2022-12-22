@@ -30,6 +30,33 @@
             </div>
         </div>
     </nav>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/patiente/new">Datos Personales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/chargesheet/new">Hoja de Cargo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/resume/new">Resumen</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/histOcup/new">Hist Ocup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/ihs/new">Est Salud Inic</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/pathHist/new">Antec Patol</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/iSanitCont/new">Control Sanit Init</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/vacunation/new">Vacunacion</a>
+          </li>
+      </ul>
 {% endblock %}
 
 {% block content %}
@@ -43,6 +70,8 @@
         {% endwith %}
 
         {# application content needs to be provided in the app_content block #}
-        {% block app_content %}{% endblock %}
+        <div class="col-6 h-100 w-100">
+          {% block form-content %}{% endblock %}
+        </div>
     </div>
 {% endblock %}
