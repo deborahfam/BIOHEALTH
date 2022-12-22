@@ -268,3 +268,4 @@ CUBA_INFO = [
 CUBA_MUNICIPALITIES = [i["municipios"] if i["id"] != "15" else [i["nombre"]] for i in CUBA_INFO]
 CUBA_MUNICIPALITIES = [item for sublist in CUBA_MUNICIPALITIES for item in sublist]
 BLOOD_TYPE = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+DISPENSARIAL_GROUP = ['I Sano','II Con Riesto','III Enfermo','IV Con Secuelas','No Evaluado']

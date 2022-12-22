@@ -12,8 +12,6 @@ class LoginForm(FlaskForm):
 class ResetPasswordRequestForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
-
-
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
@@ -45,3 +43,46 @@ class PatienteForm(FlaskForm):
     bloodType = SelectField('Tipo de Sangre', choices=[(x,x) for x in BLOOD_TYPE])
     donor = BooleanField('Donante')
     submit = SubmitField('Crear Entrada')
+
+class ChargesheetForm(FlaskForm):
+    ci = StringField('CI', validators=[DataRequired()])
+    date = DateField('Fecha', format='%d/%m/%Y')
+    consultationReason = StringField('Motivo de Consulta', validators=[DataRequired()])
+    diagnostic = StringField('Diagnostico', validators=[DataRequired()])
+    reaction = StringField('Conducta', validators=[DataRequired()])
+    indicatedDrugs = StringField('Farmacos indicados', validators=[DataRequired()])
+    evolution = StringField('Evolucion', validators=[DataRequired()])
+    submit = SubmitField('Crear Entrada')
+
+class ResumeForm(FlaskForm):
+    ci = StringField('CI', validators=[DataRequired()])
+    anno = DateField('Anno', format='%d/%m/%Y')
+    dispensaryGroup = SelectField('Grupo Dispensarial', choices=[(x,x) for x in DISPENSARIAL_GROUP])
+    valoration = StringField('Valoracion', validators=[DataRequired()])
+    submit = SubmitField('Crear Entrada')
+    
+#Not Working, don't know
+class OcupationalHistoryForm(FlaskForm):
+    ci = StringField('CI', validators=[DataRequired()])
+    date = DateField('Fecha', format='%d/%m/%Y')
+    previousOccupation = StringField('Labor Realizada', validators=[DataRequired()])
+    exposedTo = StringField('Expuesto a', validators=[DataRequired()])
+    exposedToInTime = StringField('Cuanto Tiempo', validators=[DataRequired()])
+    currentOccupation = StringField('Ocupacion Actual', validators=[DataRequired()])
+    currentOccupationSince = StringField('Desde', format='%d/%m/%Y')
+    currentOccupationTo = StringField('Hasta', format='%d/%m/%Y')
+    submit = SubmitField('Crear Entrada')
+class InitialHealthStateForm(FlaskForm):
+    ci = StringField('CI', validators=[DataRequired()])
+    date = DateField('Fecha', format='%d/%m/%Y')
+    drugAlergy = StringField('Alergia a Medicamentos', validators=[DataRequired()])
+    tetanusVaccionelastActivation = DateField('Fecha ultima activacion', format='%d/%m/%Y')
+    tetanusVaccionenextActivation = DateField('Fecha proxima activacion', format='%d/%m/%Y')
+    submit = SubmitField('Crear Entrada')
+
+class PathologicalHistoryForm(FlaskForm):
+     ci = StringField('CI', validators=[DataRequired()])
+     #missing pathologies array or 0 and 1 strings
+     othersPathologies = StringField('Otras', validators=[DataRequired()])
+     professionalIlness = StringField('Enfermedad Rpofesional', validators=[DataRequired()])
+     surgeries = StringField('Cirugias Aplicadas', validators=[DataRequired()])
