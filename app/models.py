@@ -45,12 +45,16 @@ class ChargeSheet(db.Model):
     reaction = db.Column(db.String(64), index = True)
     indicatedDrugs = db.Column(db.String(64), index = True)
     evolution = db.Column(db.String(200), index = True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
 
 class Resume(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, index = True)    
     dispensaryGroup = db.Column(db.String(64), index = True)
     valoration = db.Column(db.String(200), index = True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
 
 class OcupationalHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -60,10 +64,17 @@ class OcupationalHistory(db.Model):
     exposedToInTime = db.Column(db.String(64), index = True)
     currentOccupation = db.Column(db.String(64), index = True)
     currentOccupationSince = db.Column(db.Date, index = True)
+    currentOccupationTo = db.Column(db.Date, index = True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
 
 class InitialHealthState(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     drugAlergy = db.Column(db.String(64), index = True)
+    tetanusVaccionelastActivation = db.Column(db.Date, index=True)
+    tetanusVaccionenextActivation = db.Column(db.Date, index=True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
 
 class PahtolocalHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -71,6 +82,8 @@ class PahtolocalHistory(db.Model):
     othersPathologies = db.Column(db.String(64), index = True)
     professionalIlness = db.Column(db.String(64), index = True)
     surgeries = db.Column(db.String(64), index = True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
 
 class InitialSanitaryControl(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -84,27 +97,80 @@ class InitialSanitaryControl(db.Model):
     return3MonthControl = db.Column(db.Boolean, index = True)
     returneMothControlDate = db.Column(db.Date, index = True)
     controls3Month = db.Column(db.String(6), index = True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
 
 class Vacunation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     vaccines = db.Column(db.String(11), index = True)
     anothers = db.Column(db.String(64), index = True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
 
 class GeneticsRisks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, index = True)
     risks = db.Column(db.String(4), index=True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
 
 class ExpositionRisks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, index = True)
     risks = db.Column(db.String(17), index=True)
-    anothers = db.Column(db.String(17), index=True)
+    anothers = db.Column(db.String(64), index=True)
     non_ionazinRadiations = db.Column(db.String(4), index=True)
     ionazingRadiations = db.Column(db.String(6), index=True)
     expRadiometricEvaluation = db.Column(db.String(1), index=True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
     
+class CronicsIlness(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, index = True)
+    ilness = db.Column(db.String(20), index=True)
+    anothers = db.Column(db.String(64), index=True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
+
+#UNFINISH
+class Incidents(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, index = True)
+    casualEvent = db.Column(db.String(64), index=True)
+    accident = db.Column(db.Boolean, index=True)
+    accidentProperties = db.Column(db.String(64), index=True)
+
+class Psicological(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, index = True)
+    workFeelings = db.Column(db.String(64), index = True)
+    stressLevel = db.Column(db.String(64), index = True)
+    symptoms = db.Column(db.String(64), index = True)
+    patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
     
-    
+class BodyExamn(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, index = True)
+    kgWeight = db.Column(db.Float, index=True)
+    sizeInM = db.Column(db.Float, index=True)
+    IMC = db.Column(db.Float, index=True)
+    general = db.Column(db.String(64), index=True)
+    regional = db.Column(db.String(64), index=True)
+    thyroid = db.Column(db.String(64), index=True)
+    brest = db.Column(db.String(64), index=True)
+    interrrogation = db.Column(db.String(64), index=True)
+    respiratory = db.Column(db.String(64), index=True)
+    nutricionalState = db.Column(db.String(64), index=True)
+    nutricionalState = db.Column(db.String(64), index=True)
+    nutricionalState = db.Column(db.String(64), index=True)
+    nutricionalState = db.Column(db.String(64), index=True)
+    nutricionalState = db.Column(db.String(64), index=True)
+    nutricionalState = db.Column(db.String(64), index=True)
+    nutricionalState = db.Column(db.String(64), index=True)
+    nutricionalState = db.Column(db.String(64), index=True)
+    nutricionalState = db.Column(db.String(64), index=True)
+    nutricionalState = db.Column(db.String(64), index=True)
     
     
