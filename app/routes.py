@@ -1,9 +1,10 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app
+from wtforms import BooleanField
 from werkzeug.urls import url_parse
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
-from app.form import LoginForm, InitialHealthStateForm, OcupationalHistoryForm, ResumeForm, PatienteForm, ChargesheetForm, ResetPasswordForm, ResetPasswordRequestForm
+from app.form import LoginForm, InitialSanitaryControlForm, PathologicalHistoryForm, InitialHealthStateForm, OcupationalHistoryForm, ResumeForm, PatienteForm, ChargesheetForm, ResetPasswordForm, ResetPasswordRequestForm
 from app.email import send_password_reset_email
 
 @app.route('/')
@@ -68,6 +69,20 @@ def inihealthstate_new():
         print(request.form)
     form = InitialHealthStateForm()
     return render_template('patiente_form.html', title='Añadir Resumen', form=form)
+
+@app.route('/pathHist/new',methods=['GET', 'POST'])
+def pathHist_new():
+    if(request.method == 'POST'):
+        print(request.form)
+    form = PathologicalHistoryForm()
+    return render_template('patiente_form.html', title='Añadir Resumen', form=form)
+
+@app.route('/iSanitCont/new',methods=['GET', 'POST'])
+def iniSanCon_new():
+    if(request.method == 'POST'):
+        print(request.form)
+    form = InitialSanitaryControlForm()
+    return render_template('patiente_form.html', title='Añadir Control Sanitario Inicial', form=form)
 
 
 # @app.route('/reset_password_request', methods=['GET', 'POST'])

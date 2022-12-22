@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from .constants import *
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField, SelectField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField, SelectField, IntegerField, SelectMultipleField, widgets
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, NumberRange, Length
 
 class LoginForm(FlaskForm):
@@ -69,8 +69,8 @@ class OcupationalHistoryForm(FlaskForm):
     exposedTo = StringField('Expuesto a', validators=[DataRequired()])
     exposedToInTime = StringField('Cuanto Tiempo', validators=[DataRequired()])
     currentOccupation = StringField('Ocupacion Actual', validators=[DataRequired()])
-    currentOccupationSince = StringField('Desde', format='%d/%m/%Y')
-    currentOccupationTo = StringField('Hasta', format='%d/%m/%Y')
+    currentOccupationSince = DateField('Desde', format='%d/%m/%Y')
+    currentOccupationTo = DateField('Hasta', format='%d/%m/%Y')
     submit = SubmitField('Crear Entrada')
 class InitialHealthStateForm(FlaskForm):
     ci = StringField('CI', validators=[DataRequired()])
@@ -80,9 +80,33 @@ class InitialHealthStateForm(FlaskForm):
     tetanusVaccionenextActivation = DateField('Fecha proxima activacion', format='%d/%m/%Y')
     submit = SubmitField('Crear Entrada')
 
+class MultiCheckboxField(SelectMultipleField):
+    widget = widgets.ListWidget(prefix_label=False)
+    option_widget = widgets.CheckboxInput()
 class PathologicalHistoryForm(FlaskForm):
-     ci = StringField('CI', validators=[DataRequired()])
-     #missing pathologies array or 0 and 1 strings
-     othersPathologies = StringField('Otras', validators=[DataRequired()])
-     professionalIlness = StringField('Enfermedad Rpofesional', validators=[DataRequired()])
-     surgeries = StringField('Cirugias Aplicadas', validators=[DataRequired()])
+    ci = StringField('CI', validators=[DataRequired()])
+    
+    string_of_files = ['one', 'two', 'three']
+    # create a list of value/description tuples
+    files = [(x, x) for x in string_of_files]
+    pathologies = MultiCheckboxField('Pathologies', choices=files)
+    
+    othersPathologies = StringField('Otras', validators=[DataRequired()])
+    professionalIlness = StringField('Enfermedad Profesional', validators=[DataRequired()])
+    surgeries = StringField('Cirugias Aplicadas', validators=[DataRequired()])
+    submit = SubmitField('Crear Entrada')
+    
+
+class InitialSanitaryControlForm(FlaskForm):
+    ci = StringField('CI', validators=[DataRequired()])
+    country = SelectField('Tipo de Sangre', choices=[(x,x) for x in COUNTRIES])
+    outside = BooleanField('Ha salido al extranjero')
+    departureDate = DateField('Fecha de Salida', format='%d,%m,%Y')
+    arrivalDate = DateField('Fecha de Salida', format='%d,%m,%Y')
+    returnControl = BooleanField('Controlado al regreso')
+    returnControlDate = DateField('Fecha de Control', format='%d,%m,%Y')
+    ##missing controles realizados
+    return3MonthControl = BooleanField('Controlado a los 3 Meses')
+    returneMothControlDate = DateField('Fecha de Control', format='%d,%m,%Y')
+    ##missing controles realizados
+
