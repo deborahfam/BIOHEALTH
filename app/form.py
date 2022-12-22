@@ -86,7 +86,18 @@ class MultiCheckboxField(SelectMultipleField):
 class PathologicalHistoryForm(FlaskForm):
     ci = StringField('CI', validators=[DataRequired()])
     
-    string_of_files = ['one', 'two', 'three']
+    string_of_files = [
+        'Sarampión', 'Tuberculosis', 
+        'Rubéola','Parotiditis',
+        'Varicela','Leptospirosis',
+        'Fiebre Tifoidea','Hepatitis Viral',
+        'Dengue','Lepra', 'Paludismo',
+        'Encefalitis Meningitis','Sifilis',
+        'Gonorrea','Condiloma Acuminata',
+        'Orquiepididimitis','Sindrome de Secrecion Uretal',
+        'Enfermedad Inflamatoria Pelvia',
+        'Sindrome de Secrecion Vaginal','Herpes Simple Genital'
+        ]
     # create a list of value/description tuples
     files = [(x, x) for x in string_of_files]
     pathologies = MultiCheckboxField('Pathologies', choices=files)
@@ -99,14 +110,56 @@ class PathologicalHistoryForm(FlaskForm):
 
 class InitialSanitaryControlForm(FlaskForm):
     ci = StringField('CI', validators=[DataRequired()])
-    country = SelectField('Tipo de Sangre', choices=[(x,x) for x in COUNTRIES])
+    country = SelectField('País', choices=[(x,x) for x in COUNTRIES])
     outside = BooleanField('Ha salido al extranjero')
     departureDate = DateField('Fecha de Salida', format='%d,%m,%Y')
     arrivalDate = DateField('Fecha de Salida', format='%d,%m,%Y')
     returnControl = BooleanField('Controlado al regreso')
     returnControlDate = DateField('Fecha de Control', format='%d,%m,%Y')
-    ##missing controles realizados
+    string_of_files1 = [
+        'ELISA VIH', 'Gota Gruesa', 
+        'Serología Sífilis','Serología Hepatitis B',
+        'Serología Hepatitis C'
+        ]
+    # create a list of value/description tuples
+    files = [(x, x) for x in string_of_files1]
+    controls = MultiCheckboxField('Controles realizados', choices=files)
     return3MonthControl = BooleanField('Controlado a los 3 Meses')
     returneMothControlDate = DateField('Fecha de Control', format='%d,%m,%Y')
-    ##missing controles realizados
+    string_of_files2 = [
+        'ELISA VIH', 'Gota Gruesa', 
+        'Serología Sífilis','Serología Hepatitis B',
+        'Serología Hepatitis C'
+        ]
+    # create a list of value/description tuples
+    files = [(x, x) for x in string_of_files2]
+    controls3month = MultiCheckboxField('Controles realizados', choices=files)
+    submit = SubmitField('Crear Entrada')
+    
+#TODO: Implementar los routes de las clases siguientes:
+class VacunationForm(FlaskForm):
+    ci = StringField('CI', validators=[DataRequired()])
+    string_of_files = [
+        'BCG', 'DPT', 'Anti-Polio',
+        'PRS','Hepatitis B', 'Anti-Meningococo',
+        'Anti-Leptospira','Anti-Tífica',
+        'Anti-Influeza','Anti-rábica',
+        'Anti-fiebre amarilla'
+        ]
+    # create a list of value/description tuples
+    files = [(x, x) for x in string_of_files]
+    vaccines = MultiCheckboxField('Vacunas', choices=files)
+    anothers = StringField('Otras', validators=[DataRequired()])
+    submit = SubmitField('Crear Entrada')
+    
+class GeneticsRisksForm(FlaskForm):
+    ci = StringField('CI', validators=[DataRequired()])
+    date = DateField('Fecha', format='%d/%m/%Y')
+    string_of_files = [
+        'Cigarro', 'Alcohol', 'Obesidad',
+        'Sedentarismo'
+        ]
+    # create a list of value/description tuples
+    files = [(x, x) for x in string_of_files]
+    risks = MultiCheckboxField('Riesgos Geneticos', choices=files)
 

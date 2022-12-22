@@ -305,3 +305,4 @@ class MedicCheck(db.Model):
     check= db.Column(db.Boolean, index=True)
     patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
+
