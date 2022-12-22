@@ -163,7 +163,6 @@ class CronicsIlness(db.Model):
     patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
-#UNFINISH
 class Incidents(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, index = True)

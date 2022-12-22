@@ -464,3 +464,4 @@ COUNTRIES = [
     "Yibuti", 
     "Zambia",  
     "Zimbabue"]
+RADIOMET = ['Aceptable','Permisible','Prohibido']
