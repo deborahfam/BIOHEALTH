@@ -3,7 +3,7 @@ from app import app
 from werkzeug.urls import url_parse
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
-from app.form import LoginForm
+from app.form import LoginForm, PatienteForm
 
 @app.route('/')
 @app.route('/index')
@@ -32,3 +32,10 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/patiente/new',methods=['GET', 'POST'])
+def user_new():
+    if(request.method == 'POST'):
+        print(request.form)
+    form = PatienteForm()
+    return render_template('patiente_form.html', title='Añadir Paciente', form=form)

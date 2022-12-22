@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="login-form-container d-flex flex-column p-5 place-self-center">
+        <h1>{{ form_name }}</h1>
+        <form action="" method="post">
+            <div class="row">
+              <div class="col">
+                {{ form.ci.label }}<br>
+                {{ form.ci(size=32) }}<br>
+                {% for error in form.ci.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div class="col">
+                {{ form.jobRecord.label }}<br>
+                {{ form.jobRecord(size=32) }}<br>
+                {% for error in form.jobRecord.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div class="col">
+                {{ form.firstName.label }}<br>
+                {{ form.firstName(size=32) }}<br>
+                {% for error in form.firstName.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div class="col">
+                {{ form.lastName.label }}<br>
+                {{ form.lastName(size=32) }}<br>
+                {% for error in form.lastName.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div class="col">
+                <span class="place-self-center">
+                  {{ form.out() }} {{ form.out.label }}
+                </span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                {{ form.date.label }}<br>
+                {{ form.date() }}<br>
+              </div>
+              <div class="col">
+                {{ form.o_category.label }}<br>
+                {{ form.o_category() }}<br>
+              </div>
+              <div class="col">
+                {{ form.area.label }}<br>
+                {{ form.area() }}<br>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col d-flex justify-content-between">
+                <div>
+                  {{ form.age.label }}<br>
+                  {{ form.age(size=32) }}<br>
+                  {% for error in form.age.errors %}
+                  <span style="color: red;">[{{ error }}]</span>
+                  {% endfor %}
+                </div>
+                <div>
+                  {{ form.sex.label }}<br>
+                  {{ form.sex() }}<br>
+                  {% for error in form.sex.errors %}
+                  <span style="color: red;">[{{ error }}]</span>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="col">
+                {{ form.study_level.label }}<br>
+                {{ form.study_level() }}<br>
+              </div>
+              <div class="col">
+                {{ form.color_skin.label }}<br>
+                {{ form.color_skin() }}<br>
+              </div>
+              <div class="col">
+                {{ form.tel.label }}<br>
+                {{ form.tel(size=32) }}<br>
+                {% for error in form.tel.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                {{ form.street.label }}<br>
+                {{ form.street(size=64) }}<br>
+                {% for error in form.street.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div class="col">
+                {{ form.number.label }}<br>
+                {{ form.number(size=32) }}<br>
+                {% for error in form.number.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div class="col">
+                {{ form.apt.label }}<br>
+                {{ form.apt() }}<br>
+                {% for error in form.apt.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div class="col">
+                {{ form.between.label }}<br>
+                {{ form.between(size=64) }}<br>
+                {% for error in form.between.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div class="col">
+                {{ form.neighborhood.label }}<br>
+                {{ form.neighborhood(size=64) }}<br>
+                {% for error in form.neighborhood.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                {{ form.province.label }}<br>
+                {{ form.province() }}<br>
+              </div>
+              <div class="col">
+                {{ form.municipality.label }}<br>
+                {{ form.municipality() }}<br>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                {{ form.ageGroup.label }}<br>
+                {{ form.ageGroup(size=32) }}<br>
+                {% for error in form.ageGroup.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+              <div class="col">
+                {{ form.bloodType.label }}<br>
+                {{ form.bloodType() }}<br>
+              </div>
+              <div class="col">
+                <span class="place-self-center">
+                  {{ form.donor() }} {{ form.donor.label }}
+                </span>
+              </div>
+            </div>
+            <p>{{ form.submit() }}</p>
+        </form>
+    </div>
+{% endblock %}
