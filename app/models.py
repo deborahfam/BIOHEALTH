@@ -22,6 +22,7 @@ def load_user(id):
 
 class Patiente(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    ci = db.Column(db.Integer, primary_key=True)
     down = db.Column(db.Boolean, index=True)
     jobRecord = db.Column(db.Integer, index=True)
     jobZone = db.Column(db.String(64), index=True)
@@ -74,7 +75,7 @@ class ChargeSheet(db.Model):
     reaction = db.Column(db.String(64), index = True)
     indicatedDrugs = db.Column(db.String(64), index = True)
     evolution = db.Column(db.String(200), index = True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class Resume(db.Model):
@@ -82,7 +83,7 @@ class Resume(db.Model):
     date = db.Column(db.Date, index = True)    
     dispensaryGroup = db.Column(db.String(64), index = True)
     valoration = db.Column(db.String(200), index = True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class OcupationalHistory(db.Model):
@@ -94,7 +95,7 @@ class OcupationalHistory(db.Model):
     currentOccupation = db.Column(db.String(64), index = True)
     currentOccupationSince = db.Column(db.Date, index = True)
     currentOccupationTo = db.Column(db.Date, index = True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class InitialHealthState(db.Model):
@@ -102,7 +103,7 @@ class InitialHealthState(db.Model):
     drugAlergy = db.Column(db.String(64), index = True)
     tetanusVaccionelastActivation = db.Column(db.Date, index=True)
     tetanusVaccionenextActivation = db.Column(db.Date, index=True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class PathologicalHistory(db.Model):
@@ -111,7 +112,7 @@ class PathologicalHistory(db.Model):
     othersPathologies = db.Column(db.String(64), index = True)
     professionalIlness = db.Column(db.String(64), index = True)
     surgeries = db.Column(db.String(64), index = True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class InitialSanitaryControl(db.Model):
@@ -126,21 +127,21 @@ class InitialSanitaryControl(db.Model):
     return3MonthControl = db.Column(db.Boolean, index = True)
     returneMothControlDate = db.Column(db.Date, index = True)
     controls3Month = db.Column(db.String(6), index = True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class Vacunation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     vaccines = db.Column(db.String(11), index = True)
     anothers = db.Column(db.String(64), index = True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class GeneticsRisks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, index = True)
     risks = db.Column(db.String(4), index=True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class ExpositionRisks(db.Model):
@@ -151,7 +152,7 @@ class ExpositionRisks(db.Model):
     non_ionazinRadiations = db.Column(db.String(4), index=True)
     ionazingRadiations = db.Column(db.String(6), index=True)
     expRadiometricEvaluation = db.Column(db.String(1), index=True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
     
 class CronicsIlness(db.Model):
@@ -159,7 +160,7 @@ class CronicsIlness(db.Model):
     date = db.Column(db.Date, index = True)
     ilness = db.Column(db.String(20), index=True)
     anothers = db.Column(db.String(64), index=True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 #UNFINISH
@@ -175,7 +176,7 @@ class Incidents(db.Model):
     medicalCerificatedTo = db.Column(db.Date, index=True)
     medicalcertificatedCauses = db.Column(db.String(64), index=True)
     medicalCertificatedFrom = db.Column(db.String(64), index=True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class Psicological(db.Model):
@@ -184,7 +185,7 @@ class Psicological(db.Model):
     workFeelings = db.Column(db.String(64), index = True)
     stressLevel = db.Column(db.String(64), index = True)
     symptoms = db.Column(db.String(64), index = True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
     
 class BodyExamn(db.Model):
@@ -213,7 +214,7 @@ class BodyExamn(db.Model):
     pelvicGirdleLowerLimbs = db.Column(db.String(64), index=True)
     spine = db.Column(db.String(64), index=True)
     neurologicStats = db.Column(db.String(64), index=True)    
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
     
 class Complementary(db.Model):
@@ -257,7 +258,7 @@ class Complementary(db.Model):
     adiometricaTest= db.Column(db.String(64), index=True)
     Rx= db.Column(db.String(64), index=True)
     EKG= db.Column(db.String(64), index=True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
    
 class ArterialTension(db.Model):
@@ -266,13 +267,13 @@ class ArterialTension(db.Model):
     TAS= db.Column(db.Float, index=True)
     TDH= db.Column(db.Float, index=True)
     position= db.Column(db.String(64), index=True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
    
 class Donor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, index = True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class Vision(db.Model):
@@ -283,7 +284,7 @@ class Vision(db.Model):
     OI= db.Column(db.String(64), index=True)
     results= db.Column(db.String(64), index=True)
     diagnostic= db.Column(db.String(64), index=True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
 
 class MedicCheck(db.Model):
@@ -302,5 +303,5 @@ class MedicCheck(db.Model):
     correctiveAction= db.Column(db.String(64), index=True)
     nextMedicCheck = db.Column(db.Date, index=True)
     check= db.Column(db.Boolean, index=True)
-    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.id'))
+    patiente_id = db.Column(db.Integer, db.ForeignKey('patiente.ci'))
     
