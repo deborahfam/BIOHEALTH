@@ -271,7 +271,7 @@ class MedicCheck(db.Model):
     extra= db.Column(db.String(64), index=True)
     suitable= db.Column(db.String(64), index=True)
     correctiveAction= db.Column(db.String(64), index=True)
-    nextMedicCheck = db.column(db.Date, index=True)
+    nextMedicCheck = db.Column(db.Date, index=True)
     check= db.Column(db.Boolean, index=True)
     patiente = db.Column(db.Integer, db.ForeignKey('patiente.id'))
     patiente = db.relationship("Patiente", backref= db.backref("patiente", uselist=False))
