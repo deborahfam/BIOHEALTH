@@ -41,7 +41,7 @@ class Patiente(db.Model):
     number = db.Column(db.Integer, index=True)
     apt_number = db.Column(db.Integer, index=True)    
     province = db.Column(db.String(64), index=True)
-    minicipality = db.Column(db.String(64), index=True)
+    municipality = db.Column(db.String(64), index=True)
     edadGroup = db.Column(db.Integer, index=True)
     factorGroup = db.Column(db.Integer, index=True)
     donor = db.Column(db.Boolean, index=True)

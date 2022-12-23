@@ -1,8 +1,8 @@
-"""user table
+"""user_table
 
-Revision ID: 9e24f79e7f71
+Revision ID: 95b4e63fa22d
 Revises: 
-Create Date: 2022-12-21 23:32:31.393831
+Create Date: 2022-12-22 18:55:32.034408
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9e24f79e7f71'
+revision = '95b4e63fa22d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,7 +39,7 @@ def upgrade():
     sa.Column('number', sa.Integer(), nullable=True),
     sa.Column('apt_number', sa.Integer(), nullable=True),
     sa.Column('province', sa.String(length=64), nullable=True),
-    sa.Column('minicipality', sa.String(length=64), nullable=True),
+    sa.Column('municipality', sa.String(length=64), nullable=True),
     sa.Column('edadGroup', sa.Integer(), nullable=True),
     sa.Column('factorGroup', sa.Integer(), nullable=True),
     sa.Column('donor', sa.Boolean(), nullable=True),
@@ -60,7 +60,7 @@ def upgrade():
         batch_op.create_index(batch_op.f('ix_patiente_jobRecord'), ['jobRecord'], unique=False)
         batch_op.create_index(batch_op.f('ix_patiente_jobZone'), ['jobZone'], unique=False)
         batch_op.create_index(batch_op.f('ix_patiente_lastname'), ['lastname'], unique=False)
-        batch_op.create_index(batch_op.f('ix_patiente_minicipality'), ['minicipality'], unique=False)
+        batch_op.create_index(batch_op.f('ix_patiente_municipality'), ['municipality'], unique=False)
         batch_op.create_index(batch_op.f('ix_patiente_neighborhood'), ['neighborhood'], unique=False)
         batch_op.create_index(batch_op.f('ix_patiente_number'), ['number'], unique=False)
         batch_op.create_index(batch_op.f('ix_patiente_ocupCategory'), ['ocupCategory'], unique=False)
@@ -87,7 +87,7 @@ def upgrade():
     sa.Column('TDH', sa.Float(), nullable=True),
     sa.Column('position', sa.String(length=64), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('arterial_tension', schema=None) as batch_op:
@@ -123,7 +123,7 @@ def upgrade():
     sa.Column('spine', sa.String(length=64), nullable=True),
     sa.Column('neurologicStats', sa.String(length=64), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('body_examn', schema=None) as batch_op:
@@ -161,7 +161,7 @@ def upgrade():
     sa.Column('indicatedDrugs', sa.String(length=64), nullable=True),
     sa.Column('evolution', sa.String(length=200), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('charge_sheet', schema=None) as batch_op:
@@ -214,7 +214,7 @@ def upgrade():
     sa.Column('Rx', sa.String(length=64), nullable=True),
     sa.Column('EKG', sa.String(length=64), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('complementary', schema=None) as batch_op:
@@ -264,7 +264,7 @@ def upgrade():
     sa.Column('ilness', sa.String(length=20), nullable=True),
     sa.Column('anothers', sa.String(length=64), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('cronics_ilness', schema=None) as batch_op:
@@ -276,7 +276,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('date', sa.Date(), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('donor', schema=None) as batch_op:
@@ -291,7 +291,7 @@ def upgrade():
     sa.Column('ionazingRadiations', sa.String(length=6), nullable=True),
     sa.Column('expRadiometricEvaluation', sa.String(length=1), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('exposition_risks', schema=None) as batch_op:
@@ -307,7 +307,7 @@ def upgrade():
     sa.Column('date', sa.Date(), nullable=True),
     sa.Column('risks', sa.String(length=4), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('genetics_risks', schema=None) as batch_op:
@@ -327,7 +327,7 @@ def upgrade():
     sa.Column('medicalcertificatedCauses', sa.String(length=64), nullable=True),
     sa.Column('medicalCertificatedFrom', sa.String(length=64), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('incidents', schema=None) as batch_op:
@@ -348,7 +348,7 @@ def upgrade():
     sa.Column('tetanusVaccionelastActivation', sa.Date(), nullable=True),
     sa.Column('tetanusVaccionenextActivation', sa.Date(), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('initial_health_state', schema=None) as batch_op:
@@ -369,7 +369,7 @@ def upgrade():
     sa.Column('returneMothControlDate', sa.Date(), nullable=True),
     sa.Column('controls3Month', sa.String(length=6), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('initial_sanitary_control', schema=None) as batch_op:
@@ -401,7 +401,7 @@ def upgrade():
     sa.Column('nextMedicCheck', sa.Date(), nullable=True),
     sa.Column('check', sa.Boolean(), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('medic_check', schema=None) as batch_op:
@@ -430,7 +430,7 @@ def upgrade():
     sa.Column('currentOccupationSince', sa.Date(), nullable=True),
     sa.Column('currentOccupationTo', sa.Date(), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('ocupational_history', schema=None) as batch_op:
@@ -449,7 +449,7 @@ def upgrade():
     sa.Column('professionalIlness', sa.String(length=64), nullable=True),
     sa.Column('surgeries', sa.String(length=64), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('pathological_history', schema=None) as batch_op:
@@ -465,7 +465,7 @@ def upgrade():
     sa.Column('stressLevel', sa.String(length=64), nullable=True),
     sa.Column('symptoms', sa.String(length=64), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('psicological', schema=None) as batch_op:
@@ -480,7 +480,7 @@ def upgrade():
     sa.Column('dispensaryGroup', sa.String(length=64), nullable=True),
     sa.Column('valoration', sa.String(length=200), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('resume', schema=None) as batch_op:
@@ -493,7 +493,7 @@ def upgrade():
     sa.Column('vaccines', sa.String(length=11), nullable=True),
     sa.Column('anothers', sa.String(length=64), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('vacunation', schema=None) as batch_op:
@@ -509,7 +509,7 @@ def upgrade():
     sa.Column('results', sa.String(length=64), nullable=True),
     sa.Column('diagnostic', sa.String(length=64), nullable=True),
     sa.Column('patiente_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.id'], ),
+    sa.ForeignKeyConstraint(['patiente_id'], ['patiente.ci'], ),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('vision', schema=None) as batch_op:
@@ -740,7 +740,7 @@ def downgrade():
         batch_op.drop_index(batch_op.f('ix_patiente_ocupCategory'))
         batch_op.drop_index(batch_op.f('ix_patiente_number'))
         batch_op.drop_index(batch_op.f('ix_patiente_neighborhood'))
-        batch_op.drop_index(batch_op.f('ix_patiente_minicipality'))
+        batch_op.drop_index(batch_op.f('ix_patiente_municipality'))
         batch_op.drop_index(batch_op.f('ix_patiente_lastname'))
         batch_op.drop_index(batch_op.f('ix_patiente_jobZone'))
         batch_op.drop_index(batch_op.f('ix_patiente_jobRecord'))

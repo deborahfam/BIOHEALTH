@@ -1,9 +1,10 @@
 from flask import render_template, flash, redirect, url_for, request
+from flask_sqlalchemy import SQLAlchemy
 from app import app
 from wtforms import BooleanField
 from werkzeug.urls import url_parse
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import *
 from app.form import LoginForm,  ComplementaryForm, ArterialTensionForm, DonorForm, VisionForm, MedicCheckForm,  IncidentsForm, PsicologicalForm, BodyExamnForm, VacunationForm,GeneticsRisksForm, ExpositionRisksForm, CronicsIlnessForm, InitialSanitaryControlForm, PathologicalHistoryForm, InitialHealthStateForm, OcupationalHistoryForm, ResumeForm, PatienteForm, ChargesheetForm, ResetPasswordForm, ResetPasswordRequestForm
 from app.email import send_password_reset_email
 
@@ -167,6 +168,15 @@ def medic_check_new():
         print(request.form)
     form = MedicCheckForm()
     return render_template('patiente_form.html', title='Añadir Revisión Médica', form=form)
+
+#consultas de revisado
+@app.route('/chargesheet/<int:user_id>', methods=['GET', 'POST'])
+def editChargeSheet_new(user_id):
+    if request.method == 'POST':
+        print(request.form)
+    arterial_tension = ChargeSheet.query.filter_by(patiente_id=user_id).first()
+    form = ChargesheetForm(obj=arterial_tension)
+    return render_template('patiente_form.html', title='Añadir Tensión Arterial', form=form)
 
 # @app.route('/reset_password_request', methods=['GET', 'POST'])
 # def reset_password_request():
